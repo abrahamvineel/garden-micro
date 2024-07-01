@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: garden
+    ports:
+      - "5432:5432"
+    networks:
+      - o-network
+    volumes:
+      - postgres-o-data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - "9192:9192"
+    networks:
+      - o-network
+
+networks:
+  o-network:
+    driver: bridge
+
+volumes:
+  postgres-o-data:
