@@ -1,0 +1,31 @@
+services:
+  mongo:
+    ports:
+      - '27017:27017'
+    container_name: dkrcomp-mongo
+    restart: always
+    logging:
+      options:
+        max-size: 1g
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+    image: mongo:latest
+    networks:
+      - p-network
+    volumes:
+      - mongo-p-data:/data/db
+
+  app:
+    build: .
+    ports:
+      - "9193:9193"
+    networks:
+      - p-network
+
+networks:
+  p-network:
+    driver: bridge
+
+volumes:
+  mongo-p-data:
