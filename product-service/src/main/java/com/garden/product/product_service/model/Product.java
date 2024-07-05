@@ -1,13 +1,13 @@
 package com.garden.product.product_service.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(value = "product")
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

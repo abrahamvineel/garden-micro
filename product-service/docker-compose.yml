@@ -1,20 +1,16 @@
 services:
-  mongo:
-    ports:
-      - '27017:27017'
-    container_name: dkrcomp-mongo
-    restart: always
-    logging:
-      options:
-        max-size: 1g
+  postgres:
+    image: postgres:latest
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=mongo
-      - MONGO_INITDB_ROOT_PASSWORD=mongo
-    image: mongo:latest
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: garden
+    ports:
+      - "5432:5432"
     networks:
       - p-network
     volumes:
-      - mongo-p-data:/data/db
+      - postgres-p-data:/var/lib/postgresql/data
 
   app:
     build: .
@@ -28,4 +24,4 @@ networks:
     driver: bridge
 
 volumes:
-  mongo-p-data:
+  postgres-p-data:
