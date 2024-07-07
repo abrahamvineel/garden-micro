@@ -17,6 +17,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public void addProduct(ProductRequest request) {
+
         Product product = Product.builder()
                                  .name(request.getName())
                                  .type(request.getType())
