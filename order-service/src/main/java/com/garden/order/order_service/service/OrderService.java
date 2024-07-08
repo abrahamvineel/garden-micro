@@ -7,6 +7,7 @@ import com.garden.order.order_service.model.Order;
 import com.garden.order.order_service.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,7 +16,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderService {
 
-    public final OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+    private final WebClient webClient;
 
     public void createOrder(OrderRequest orderRequest) {
         Order order = new Order();
@@ -25,7 +27,16 @@ public class OrderService {
                 .map(this::mapToItems)
                 .toList();
         order.setOrderItems(items);
-        orderRepository.save(order);
+        Boolean result = webClient.get()
+                .uri("http://localhost:9191/api/inventory")
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .block();
+        if(result) {
+            orderRepository.save(order);
+        } else {
+            throw new IllegalArgumentException("Product is not in stock");
+        }
     }
 
     private Item mapToItems(ItemDto item) {
