@@ -1,5 +1,6 @@
 package com.garden.inventory.inventory_service.controller;
 
+import com.garden.inventory.inventory_service.dto.InventoryResponse;
 import com.garden.inventory.inventory_service.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public class InventoryController {
 
     @GetMapping("/{sku-code}")
     @ResponseStatus(HttpStatus.OK)
-    public boolean isInStock(@RequestParam List<String> skuCode) {
+    public List<InventoryResponse> isInStock(@RequestParam List<String> skuCode) {
         return inventoryService.isInStock(skuCode);
     }
 }
