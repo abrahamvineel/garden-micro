@@ -36,7 +36,7 @@ public class OrderService {
                                      .toList();
 
         InventoryResponse[] inventoryResponses = webClient.get()
-                .uri("http://localhost:9191/api/inventory",
+                .uri("http://localhost:9191/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
                 .bodyToMono(InventoryResponse[].class)
