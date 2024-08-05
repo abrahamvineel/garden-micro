@@ -2,6 +2,7 @@ package com.garden.product.product_service.controller;
 
 import com.garden.product.product_service.dto.ProductRequest;
 import com.garden.product.product_service.dto.ProductResponse;
+import com.garden.product.product_service.model.Product;
 import com.garden.product.product_service.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,8 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addProduct(@RequestBody ProductRequest productRequest) {
-        productService.addProduct(productRequest);
+    public ProductResponse addProduct(@RequestBody ProductRequest productRequest) {
+        return productService.addProduct(productRequest);
     }
 
     @GetMapping

@@ -1,27 +1,13 @@
+version: '4'
 services:
-  postgres:
-    image: postgres:latest
+  mongo:
+    image: mongo:7.0.5
+    container_name: mongo
+    ports:
+      - "27017:27017"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: garden
-    ports:
-      - "5432:5432"
-    networks:
-      - p-network
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: product-service
     volumes:
-      - postgres-p-data:/var/lib/postgresql/data
-
-  app:
-    build: .
-    ports:
-      - "9193:9193"
-    networks:
-      - p-network
-
-networks:
-  p-network:
-    driver: bridge
-
-volumes:
-  postgres-p-data:
+      - ./docker/mongodb/data:/data/db
