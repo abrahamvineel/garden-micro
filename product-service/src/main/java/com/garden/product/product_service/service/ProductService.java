@@ -18,7 +18,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public ProductResponse addProduct(ProductRequest request) {
+    public void addProduct(ProductRequest request) {
 
         Product product = Product.builder()
                                  .name(request.getName())
@@ -26,7 +26,7 @@ public class ProductService {
                                  .price(request.getPrice())
                                  .build();
         log.info("Product created successfully");
-        return mapToProductResponse(productRepository.save(product));
+        productRepository.save(product);
     }
 
     public List<ProductResponse> getAllProducts() {
