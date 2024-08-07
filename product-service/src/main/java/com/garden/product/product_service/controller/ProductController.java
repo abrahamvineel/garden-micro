@@ -2,7 +2,6 @@ package com.garden.product.product_service.controller;
 
 import com.garden.product.product_service.dto.ProductRequest;
 import com.garden.product.product_service.dto.ProductResponse;
-import com.garden.product.product_service.model.Product;
 import com.garden.product.product_service.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
