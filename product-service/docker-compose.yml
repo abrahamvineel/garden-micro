@@ -1,13 +1,12 @@
 version: '4'
 services:
-  mongo:
-    image: mongo:7.0.5
-    container_name: mongo
-    ports:
-      - "27017:27017"
+  postgres:
+    image: postgres:latest
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: product-service
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: garden
+    ports:
+      - "5432:5432"
     volumes:
-      - ./data:/data/db
+      - postgres-i-data:/var/lib/postgresql/data

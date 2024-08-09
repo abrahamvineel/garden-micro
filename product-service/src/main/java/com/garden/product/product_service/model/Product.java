@@ -1,13 +1,17 @@
 package com.garden.product.product_service.model;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(value = "product")
+@Entity
+@Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -15,6 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String name;
     private String type;
