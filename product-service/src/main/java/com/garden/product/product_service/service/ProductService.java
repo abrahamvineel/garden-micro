@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,8 +20,10 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public void addProduct(ProductRequest request) {
+        UUID uuid = UUID.randomUUID();
 
         Product product = Product.builder()
+                                 .id(uuid.toString())
                                  .name(request.getName())
                                  .type(request.getType())
                                  .price(request.getPrice())
